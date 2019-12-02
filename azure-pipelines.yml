@@ -46,8 +46,8 @@ stages:
           
     - task: PublishPipelineArtifact@1
       inputs:
-        artifactName: 'manifests'
-        path: 'manifests'
+        artifactName: 'charts'
+        path: 'charts'
 
 - stage: Deploy
   displayName: Deploy stage
@@ -76,9 +76,9 @@ stages:
             inputs:
               action: deploy
               namespace: $(k8sNamespace)
-              manifests: |
-                $(System.ArtifactsDirectory)/manifests/deployment.yml
-                $(System.ArtifactsDirectory)/manifests/service.yml
+              # manifests: |
+              #   $(System.ArtifactsDirectory)/manifests/deployment.yml
+              #   $(System.ArtifactsDirectory)/manifests/service.yml
               imagePullSecrets: |
                 $(imagePullSecret)
               containers: |
