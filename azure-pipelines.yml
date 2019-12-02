@@ -30,7 +30,7 @@ stages:
   displayName: Build stage
   jobs:  
   - job: Build
-    displayName: Build
+    displayName: Build job
     pool:
       vmImage: $(vmImageName)
     steps:
@@ -44,8 +44,10 @@ stages:
         tags: |
           $(tag)
           
-    - upload: charts
-      artifact: charts
+    - task: PublishPipelineArtifact@1
+      inputs:
+        artifactName: 'manifests'
+        path: 'manifests'
 
 - stage: Deploy
   displayName: Deploy stage
